@@ -15,8 +15,8 @@ const App = () => {
           mode="horizontal"
           defaultSelectedKeys={['upload']}
           items={[
-            { key: 'upload', label: <Link to="/upload">Upload</Link> },
-            { key: 'analysis', label: <Link to="/analysis">Analysis</Link> }
+            { key: 'upload', label: <Link to="/upload">上传</Link> },
+            { key: 'analysis', label: <Link to="/analysis">分析</Link> }
           ]}
         />
       </Header>

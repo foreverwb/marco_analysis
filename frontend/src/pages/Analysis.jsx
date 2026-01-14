@@ -48,14 +48,14 @@ const AnalysisPage = () => {
     <Layout>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <Card title="Select Dataset">
+          <Card title="选择数据集">
             <Row gutter={12} align="middle">
               <Col>
                 <Select
                   style={{ width: 280 }}
                   value={datasetId}
                   onChange={setDatasetId}
-                  placeholder="Choose dataset"
+                  placeholder="请选择数据集"
                   options={datasets.map((item) => ({
                     value: item.id,
                     label: `${item.name} (${item.row_count} rows)`
@@ -63,7 +63,7 @@ const AnalysisPage = () => {
                 />
               </Col>
               <Col>
-                <Button onClick={fetchDatasets}>Refresh</Button>
+                <Button onClick={fetchDatasets}>刷新</Button>
               </Col>
             </Row>
           </Card>
@@ -72,7 +72,7 @@ const AnalysisPage = () => {
           {heatmap.warnings?.length > 0 && (
             <Alert
               type="warning"
-              message="Heatmap warnings"
+              message="热力图警告"
               description={
                 <ul>
                   {heatmap.warnings.map((warn, idx) => (
@@ -84,7 +84,7 @@ const AnalysisPage = () => {
           )}
         </Col>
         <Col span={24}>
-          <Card title="Heat Map Table">
+          <Card title="热力图表">
             <Table
               rowKey={(record) => record.symbol || record.Symbol || JSON.stringify(record)}
               columns={heatmapColumns}
@@ -98,7 +98,7 @@ const AnalysisPage = () => {
           {momentum.warnings?.length > 0 && (
             <Alert
               type="warning"
-              message="Momentum warnings"
+              message="动量警告"
               description={
                 <ul>
                   {momentum.warnings.map((warn, idx) => (
@@ -110,7 +110,7 @@ const AnalysisPage = () => {
           )}
         </Col>
         <Col span={24}>
-          <Card title="Momentum Stocks">
+          <Card title="动量股票">
             <Table
               rowKey={(record) => record.symbol || record.Symbol || JSON.stringify(record)}
               columns={momentumColumns}

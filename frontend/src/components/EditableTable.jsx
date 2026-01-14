@@ -74,7 +74,7 @@ const EditableTable = ({ columns, dataSource, confMatrix, onChange }) => {
       const content = text ?? '';
       const cellClass = conf !== undefined && conf !== -1 && conf < 60 ? 'conf-low' : '';
       return (
-        <Tooltip title={conf !== undefined && conf !== -1 ? `Conf: ${conf}` : ''}>
+        <Tooltip title={conf !== undefined && conf !== -1 ? `置信度: ${conf}` : ''}>
           <div className={cellClass} style={{ padding: '4px 0' }}>{content}</div>
         </Tooltip>
       );
@@ -97,8 +97,8 @@ const EditableTable = ({ columns, dataSource, confMatrix, onChange }) => {
       />
       {editingKey && (
         <div style={{ marginTop: 8 }}>
-          <a onClick={() => save(editingKey)} style={{ marginRight: 8 }}>Save Row</a>
-          <a onClick={cancel}>Cancel</a>
+          <a onClick={() => save(editingKey)} style={{ marginRight: 8 }}>保存行</a>
+          <a onClick={cancel}>取消</a>
         </div>
       )}
     </Form>

@@ -19,11 +19,11 @@ import EditableTable from '../components/EditableTable';
 const { Dragger } = Upload;
 
 const parserOptions = [
-  { value: 'auto', label: 'Auto' },
-  { value: 'generic', label: 'Generic' },
-  { value: 'mc_notional', label: 'MarketChameleon Notional' },
-  { value: 'mc_volume', label: 'MarketChameleon Volume' },
-  { value: 'mc_volatility', label: 'MarketChameleon Volatility' }
+  { value: 'auto', label: '自动' },
+  { value: 'generic', label: '通用' },
+  { value: 'mc_notional', label: 'MarketChameleon 名义值' },
+  { value: 'mc_volume', label: 'MarketChameleon 成交量' },
+  { value: 'mc_volatility', label: 'MarketChameleon 波动率' }
 ];
 
 const UploadPage = () => {
@@ -50,10 +50,10 @@ const UploadPage = () => {
       }));
       setTableRows(rowsWithKey);
       if (!response.data.ok) {
-        message.warning('Parsing failed, see warnings.');
+        message.warning('解析失败，请查看警告。');
       }
     } catch (error) {
-      message.error('Failed to parse image.');
+      message.error('图片解析失败。');
     } finally {
       setLoading(false);
     }
@@ -61,11 +61,11 @@ const UploadPage = () => {
 
   const handleSave = async () => {
     if (!parseResult?.columns?.length) {
-      message.warning('No parsed data to save.');
+      message.warning('没有可保存的解析数据。');
       return;
     }
     if (!datasetName) {
-      message.warning('Please enter dataset name.');
+      message.warning('请输入数据集名称。');
       return;
     }
     const rows = tableRows.map((row) => {
@@ -80,10 +80,10 @@ const UploadPage = () => {
         rows,
         source_parse_id: parseResult.parse_id
       });
-      message.success('Dataset saved.');
+      message.success('数据集已保存。');
       navigate(`/analysis?dataset_id=${response.data.dataset_id}`);
     } catch (error) {
-      message.error('Failed to save dataset.');
+      message.error('保存数据集失败。');
     }
   };
 
@@ -97,7 +97,7 @@ const UploadPage = () => {
     <Layout>
       <Row gutter={[16, 16]}>
         <Col span={24}>
-          <Card title="Upload Table Image">
+          <Card title="上传表格图片">
             <div className="table-toolbar">
               <Select
                 value={parser}
@@ -106,13 +106,13 @@ const UploadPage = () => {
                 style={{ width: 260 }}
               />
               <Input
-                placeholder="Dataset Name"
+                placeholder="数据集名称"
                 value={datasetName}
                 onChange={(event) => setDatasetName(event.target.value)}
                 style={{ width: 240 }}
               />
               <Button type="primary" onClick={handleSave} disabled={loading}>
-                Save Dataset
+                保存数据集
               </Button>
             </div>
             <Dragger
@@ -125,15 +125,15 @@ const UploadPage = () => {
               }}
             >
               <p className="ant-upload-drag-icon">📄</p>
-              <p className="ant-upload-text">Click or drag an image to upload</p>
-              <p className="ant-upload-hint">Supports table screenshots (png/jpg).</p>
+              <p className="ant-upload-text">点击或拖拽图片上传</p>
+              <p className="ant-upload-hint">支持表格截图（png/jpg）。</p>
             </Dragger>
           </Card>
         </Col>
         <Col span={24}>
           {imageUrl && (
-            <Card title="Preview">
-              <Image src={imageUrl} alt="Preview" style={{ maxHeight: 320 }} />
+            <Card title="预览">
+              <Image src={imageUrl} alt="预览" style={{ maxHeight: 320 }} />
             </Card>
           )}
         </Col>
@@ -141,7 +141,7 @@ const UploadPage = () => {
           {parseResult?.warnings?.length > 0 && (
             <Alert
               type={parseResult.ok ? 'warning' : 'error'}
-              message="Warnings"
+              message="警告"
               description={
                 <ul>
                   {parseResult.warnings.map((warn, idx) => (
@@ -153,7 +153,7 @@ const UploadPage = () => {
           )}
         </Col>
         <Col span={24}>
-          <Card title="Parsed Table" loading={loading}>
+          <Card title="解析表格" loading={loading}>
             <EditableTable
               columns={columns}
               dataSource={tableRows}
