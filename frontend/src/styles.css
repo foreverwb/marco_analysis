@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  background: #f5f7fb;
+}
+
+.conf-low {
+  background-color: #fff1f0;
+}
+
+.table-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
